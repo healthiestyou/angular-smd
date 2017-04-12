@@ -10,13 +10,13 @@ ROLLUP="node node_modules/.bin/rollup"
 # Run Angular Compiler
 $NGC -p src/tsconfig-build.json
 
-# Rollup simple-ui-lib.js
+# Rollup
 $ROLLUP build/angular-smd.js -o dist/angular-smd.js
 
 # Run Angular Compiler to ES5
 $NGC -p src/tsconfig-es5.json
 
-# Rollup simple-ui-lib.js
+# Rollup
 $ROLLUP build/angular-smd.js -o dist/angular-smd.es5.js
 
 # Copy non-js files from build
