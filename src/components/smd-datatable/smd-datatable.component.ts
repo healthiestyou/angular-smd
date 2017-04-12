@@ -361,8 +361,8 @@ export class SmdDatatableHeader implements AfterContentInit, OnDestroy {
 
 @Component({
     selector: "smd-datatable",
-    templateUrl: "./datatable.component.html",
-    styleUrls: ["./datatable.component.scss"],
+    templateUrl: "smd-datatable.component.html",
+    styleUrls: ["smd-datatable.component.scss"],
     encapsulation: ViewEncapsulation.None,
     host: {
         '[class.smd-responsive]': 'responsive'
