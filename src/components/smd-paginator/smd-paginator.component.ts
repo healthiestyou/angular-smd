@@ -14,8 +14,8 @@ export class SmdPaginationModel {
 
 @Component({
     selector: "smd-paginator",
-    templateUrl: "./paginator.component.html",
-    styleUrls: ["./paginator.component.scss"],
+    templateUrl: "./smd-paginator.component.html",
+    styleUrls: ["./smd-paginator.component.scss"],
     encapsulation: ViewEncapsulation.None
 })
 export class SmdPaginatorComponent implements OnInit {
