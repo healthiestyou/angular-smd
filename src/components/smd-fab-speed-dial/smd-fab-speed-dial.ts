@@ -135,7 +135,7 @@ export class SmdFabSpeedDialActions implements AfterContentInit {
             <ng-content select="smd-fab-actions"></ng-content>
         </div>
     `,
-    styleUrls: ['fab-speed-dial.scss'],
+    styleUrls: ['smd-fab-speed-dial.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class SmdFabSpeedDialComponent implements AfterContentInit {

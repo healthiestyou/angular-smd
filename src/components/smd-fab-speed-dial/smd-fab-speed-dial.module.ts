@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
-import {SmdFabSpeedDialTrigger, SmdFabSpeedDialActions, SmdFabSpeedDialComponent} from "./fab-speed-dial";
+import {SmdFabSpeedDialTrigger, SmdFabSpeedDialActions, SmdFabSpeedDialComponent} from "./smd-fab-speed-dial";
 
-export * from './fab-speed-dial';
+export * from './smd-fab-speed-dial';
 
 const COMPONENTS = [
     SmdFabSpeedDialTrigger,

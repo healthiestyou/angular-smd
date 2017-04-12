@@ -23,7 +23,7 @@ import {
     ChangeDetectorRef
 } from "@angular/core";
 import {isNullOrUndefined} from "util";
-import {SmdPaginatorComponent} from "../smd-paginator/paginator.component";
+import {SmdPaginatorComponent} from "../smd-paginator/smd-paginator.component";
 import {Subscription} from "rxjs/Subscription";
 import {MdDialogRef, MdDialog, MdDialogConfig} from '@angular/material';
 
