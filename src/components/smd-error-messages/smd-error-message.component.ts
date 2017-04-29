@@ -61,9 +61,9 @@ export class SmdErrorMessageComponent {
     selector: "smd-error-messages",
     template: `
         <ng-content select="template[smdErrorMessage]"></ng-content>
-        <template smdErrorMessage for="required">Required Field</template>
-        <template smdErrorMessage for="minlength" let-myError="error">The field must have at least {{myError.requiredLength}} characters</template>
-        <template smdErrorMessage for="maxlength" let-myError="error">The field must have less than {{myError.requiredLength}} characters</template>
+        <ng-template smdErrorMessage for="required">Required Field</ng-template>
+        <ng-template smdErrorMessage for="minlength" let-myError="error">The field must have at least {{myError.requiredLength}} characters</ng-template>
+        <ng-template smdErrorMessage for="maxlength" let-myError="error">The field must have less than {{myError.requiredLength}} characters</ng-template>
     `,
     styleUrls: ['smd-error-message.component.scss'],
     encapsulation: ViewEncapsulation.None

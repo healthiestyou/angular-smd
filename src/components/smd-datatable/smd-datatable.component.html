@@ -6,9 +6,7 @@
         <thead>
         <tr>
             <th *ngIf="_shouldRenderCheckbox()">
-                <md-checkbox [(ngModel)]="checked"
-                    (change)="_onMasterCheckChange()">
-                </md-checkbox>
+                <md-checkbox [(ngModel)]="checked" (change)="_onMasterCheckChange()" ngDefaultControl></md-checkbox>
             </th>
             <th *ngFor="let column of columns"
                 [class.smd-datatable-column-sortable]="column.sortable"
@@ -25,7 +23,7 @@
         <tr *ngIf="responsive && _shouldRenderCheckbox()" class="smd-datatable-responsive-header">
             <th [attr.colspan]="columns.length + (_shouldRenderCheckbox() ? 1 : 0)">
                 <md-checkbox [(ngModel)]="checked"
-                             (change)="_onMasterCheckChange()">
+                             (change)="_onMasterCheckChange()" ngDefaultControl>
                 </md-checkbox>
             </th>
         </tr>

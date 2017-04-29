@@ -27,9 +27,9 @@ export class SmdBottomNavLabelDirective {
     selector: "smd-bottom-nav",
     template: `
         <ng-content select="template[smdBottomNavLabel]"></ng-content>
-        <template #contentTemplate>
+        <ng-template #contentTemplate>
             <ng-content></ng-content>
-        </template>
+        </ng-template>
     `
 })
 export class SmdBottomNavComponent {
