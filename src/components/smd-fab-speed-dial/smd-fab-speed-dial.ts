@@ -15,7 +15,7 @@ import {
     HostBinding,
     HostListener
 } from "@angular/core";
-import {MdButton} from "@angular/material";
+import {MdAnchor, MdButton} from "@angular/material";
 
 const Z_INDEX_ITEM: number = 23;
 
@@ -55,6 +55,7 @@ export class SmdFabSpeedDialTrigger {
 export class SmdFabSpeedDialActions implements AfterContentInit {
 
     @ContentChildren(MdButton) _buttons: QueryList<MdButton>;
+    @ContentChildren(MdAnchor) _anchors: QueryList<MdAnchor>;
 
     constructor(@Inject(forwardRef(() => SmdFabSpeedDialComponent)) private _parent: SmdFabSpeedDialComponent, private renderer: Renderer) {
     }
@@ -64,54 +65,70 @@ export class SmdFabSpeedDialActions implements AfterContentInit {
             this.initButtonStates();
             this._parent.setActionsVisibility();
         });
+        this._anchors.changes.subscribe(() => {
+            this.initButtonStates();
+            this._parent.setActionsVisibility();
+        });
 
         this.initButtonStates();
     }
 
     private initButtonStates() {
-        this._buttons.toArray().forEach((button, i) => {
+        this.getChildren().forEach((button, i) => {
             this.renderer.setElementClass(button._getHostElement(), 'smd-fab-action-item', true);
             this.changeElementStyle(button._getHostElement(), 'z-index', '' + (Z_INDEX_ITEM - i));
         })
     }
 
+    private getChildren() {
+        let children = [
+            ...this._anchors.toArray(),
+            ...this._buttons.toArray(),
+        ];
+
+        children.sort((a:any, b:any) => {
+            let elementA = a._elementRef.nativeElement;
+            let elementB = b._elementRef.nativeElement;
+            let iA = Array.from(elementA.parentNode.children).indexOf(elementA);
+            let iB = Array.from(elementB.parentNode.children).indexOf(elementB);
+            return iA > iB ? 1 : -1;
+        });
+        return children;
+    }
+
     show() {
-        if (this._buttons) {
-            this._buttons.toArray().forEach((button, i) => {
-                let transitionDelay = 0;
-                let transform;
-                if (this._parent.animationMode == 'scale') {
-                    // Incremental transition delay of 65ms for each action button
-                    transitionDelay = 3 + (65 * i);
-                    transform = 'scale(1)';
-                } else {
-                    transform = this.getTranslateFunction('0');
-                }
-                this.changeElementStyle(button._getHostElement(), 'transition-delay', transitionDelay + 'ms');
-                this.changeElementStyle(button._getHostElement(), 'opacity', '1');
-                this.changeElementStyle(button._getHostElement(), 'transform', transform);
-            })
-        }
+        this.getChildren().forEach((button, i) => {
+            let transitionDelay = 0;
+            let transform;
+            if (this._parent.animationMode == 'scale') {
+                // Incremental transition delay of 65ms for each action button
+                transitionDelay = 3 + (65 * i);
+                transform = 'scale(1)';
+            } else {
+                transform = this.getTranslateFunction('0');
+            }
+            this.changeElementStyle(button._getHostElement(), 'transition-delay', transitionDelay + 'ms');
+            this.changeElementStyle(button._getHostElement(), 'opacity', '1');
+            this.changeElementStyle(button._getHostElement(), 'transform', transform);
+        });
     }
 
     hide() {
-        if (this._buttons) {
-            this._buttons.toArray().forEach((button, i) => {
-                let opacity = '1';
-                let transitionDelay = 0;
-                let transform;
-                if (this._parent.animationMode == 'scale') {
-                    transitionDelay = 3 - (65 * i);
-                    transform = 'scale(0)';
-                    opacity = '0';
-                } else {
-                    transform = this.getTranslateFunction((55 * (i + 1) - (i * 5)) + 'px');
-                }
-                this.changeElementStyle(button._getHostElement(), 'transition-delay', transitionDelay + 'ms');
-                this.changeElementStyle(button._getHostElement(), 'opacity', opacity);
-                this.changeElementStyle(button._getHostElement(), 'transform', transform);
-            })
-        }
+        this.getChildren().forEach((button, i) => {
+            let opacity = '1';
+            let transitionDelay = 0;
+            let transform;
+            if (this._parent.animationMode == 'scale') {
+                transitionDelay = 3 - (65 * i);
+                transform = 'scale(0)';
+                opacity = '0';
+            } else {
+                transform = this.getTranslateFunction((55 * (i + 1) - (i * 5)) + 'px');
+            }
+            this.changeElementStyle(button._getHostElement(), 'transition-delay', transitionDelay + 'ms');
+            this.changeElementStyle(button._getHostElement(), 'opacity', opacity);
+            this.changeElementStyle(button._getHostElement(), 'transform', transform);
+        });
     }
 
     private getTranslateFunction(value: string) {
